@@ -14,7 +14,7 @@ class TableViewCell: UITableViewCell {
     
     @IBOutlet var dateLblCell: UILabel!
     
-    @IBOutlet var nameLabelCell: UILabel!
+    @IBOutlet var nameLabelCell: UITextView!
     
     @IBOutlet var categoryLblCell: UILabel!
     

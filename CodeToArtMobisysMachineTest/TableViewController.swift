@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import SDWebImage
 
 class TableViewController: UITableViewController {
     var jsontitle: NSArray = [],jsonposterpath: NSArray = [],jsonadult
@@ -41,13 +42,13 @@ class TableViewController: UITableViewController {
 //                print(jsonposterpath)
 
                  self.jsonadult = jsonresults.value(forKey: "adult") as! NSArray
-//                print(jsonadult)
+                print(self.jsonadult)
 
                  self.jsonreleasedate = jsonresults.value(forKey: "release_date") as! NSArray
 //                print(jsonreleasedate)
 
                 
-                
+                 self.tableView .reloadData()
             }
             
             if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
@@ -63,7 +64,7 @@ class TableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        self.tableView .reloadData()
+//        self.tableView .reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -79,8 +80,8 @@ class TableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       print("hello:",self.jsontitle.count)
-        return self.jsontitle.count
+       print("hello:",self.jsontitle.count.hashValue)
+        return self.jsontitle.count .hashValue
     }
 
     
@@ -89,16 +90,22 @@ class TableViewController: UITableViewController {
 
         // Configure the cell...
 
-//        cell.imageViewCell
-        print(self.jsontitle .object(at: indexPath.row) as! String)
+        cell.imageViewCell.sd_setImage(with: URL(string: "http://image.tmdb.org/t/p/w185/\(String (describing:jsonposterpath.object(at: indexPath.row)))"), placeholderImage: nil)
         
-        cell.nameLabelCell.text=self.jsontitle .object(at: indexPath.row) as! String
-//        cell.dateLblCell
-//        cell.categoryLblCell
+        print(self.jsontitle .object(at: indexPath.row) as? String)
         
+        cell.nameLabelCell.text=self.jsontitle .object(at: indexPath.row) as? String
+        cell.dateLblCell.text=self.jsonreleasedate.object(at: indexPath.row) as? String
+        cell.categoryLblCell.text="pratik"//self.jsonadult .object(at: indexPath.row) as? String
+        
+       
         return cell
     }
     
+    
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        
+//    }
 
     /*
     // Override to support conditional editing of the table view.
