@@ -113,7 +113,7 @@ class TableViewController: UITableViewController {
         
         nextViewController.text=self.jsonid.object(at: indexPath.row) as? String
         
-        self.present(nextViewController, animated:true, completion:nil)
+        self.navigationController?.pushViewController(nextViewController, animated:true)
         
     }
 
