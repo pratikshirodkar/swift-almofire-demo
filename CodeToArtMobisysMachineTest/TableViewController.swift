@@ -12,7 +12,7 @@ import SDWebImage
 
 class TableViewController: UITableViewController {
     var jsontitle: NSArray = [],jsonposterpath: NSArray = [],jsonadult
-        : NSArray = [],jsonreleasedate: NSArray = []
+        : NSArray = [],jsonreleasedate: NSArray = [],jsonid : NSArray = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,11 +42,13 @@ class TableViewController: UITableViewController {
 //                print(jsonposterpath)
 
                  self.jsonadult = jsonresults.value(forKey: "adult") as! NSArray
-                print(self.jsonadult)
+//                print(self.jsonadult)
 
                  self.jsonreleasedate = jsonresults.value(forKey: "release_date") as! NSArray
 //                print(jsonreleasedate)
 
+                self.jsonid=jsonresults.value(forKey: "id") as! NSArray
+                print(self.jsonid)
                 
                  self.tableView .reloadData()
             }
@@ -103,9 +105,17 @@ class TableViewController: UITableViewController {
     }
     
     
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        
-//    }
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        
+        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "ViewController") as! ViewController
+        
+        nextViewController.text=self.jsonid.object(at: indexPath.row) as? String
+        
+        self.present(nextViewController, animated:true, completion:nil)
+        
+    }
 
     /*
     // Override to support conditional editing of the table view.
