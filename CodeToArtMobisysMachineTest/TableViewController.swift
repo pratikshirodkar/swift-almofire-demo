@@ -111,7 +111,14 @@ class TableViewController: UITableViewController {
         
         let nextViewController = storyBoard.instantiateViewController(withIdentifier: "ViewController") as! ViewController
         
-        nextViewController.text=self.jsonid.object(at: indexPath.row) as? String
+        
+        print(self.jsonid)
+        let textStr = self.jsonid.object(at: indexPath.row) as! Int
+        
+        print("TextSTr:",textStr)
+        
+        nextViewController.text="\(textStr)"
+        //self.jsonid[indexPath.row] as? String
         
         self.navigationController?.pushViewController(nextViewController, animated:true)
         

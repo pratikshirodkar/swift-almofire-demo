@@ -15,7 +15,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("vasim",text ?? "hello")
+        print("vasim",text! ?? "hello")
         // Do any additional setup after loading the view, typically from a nib.
     }
 
